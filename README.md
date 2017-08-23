@@ -2,8 +2,17 @@
 
 学习使用SVG、Canvas、Three.js进行绘图
 
-* [SVG Online Editor](https://c.runoob.com/more/svgeditor/)
+## 辅助工具
 
+* [SVG Online Editor](https://c.runoob.com/more/svgeditor/)
+* [bootstrap Layout Editor](http://www.runoob.com/try/bootstrap/layoutit/)
+
+## 辅助插件
+
+* [CSS Library: Bootstrap](http://getbootstrap.com/)
+* [JavaScript Template Library: xtemplate](https://github.com/xtemplate/xtemplate)
+* [Markdown JavaScript Library: marked](https://github.com/chjj/marked)
+* [Syntax highlighting for the Web: highlight.js](https://highlightjs.org/)
 
 ## 参考资料
 
