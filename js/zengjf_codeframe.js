@@ -88,12 +88,12 @@ function read_home(){
         success : function(result){ 
             // show home.html
             $('#show-content').html(result);
+            console.info(configs["nav"]);
         } 
     }); 
 } 
 
 $(function(){ 
-    console.info("zengjf_codeframe.js");
     read_home();
 });
 
