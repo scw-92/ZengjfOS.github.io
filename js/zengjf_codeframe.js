@@ -22,7 +22,7 @@ function readHTML(){
             $('#show-content_left').html(result);
             $('#show-content_code').html(result);
             console.info(result);
-            hljs.initHighlightingOnLoad();
+            svg_javascript_control_element();
         } 
        
     }); 
