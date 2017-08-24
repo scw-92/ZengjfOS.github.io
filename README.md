@@ -10,7 +10,7 @@
 ## 辅助插件
 
 * [CSS Library: Bootstrap](http://getbootstrap.com/)
-* [JavaScript Template Library: xtemplate](https://github.com/xtemplate/xtemplate)
+* [JavaScript Template Library: Handlebars](http://handlebarsjs.com/)
 * [Markdown JavaScript Library: marked](https://github.com/chjj/marked)
 * [Syntax highlighting for the Web: highlight.js](https://highlightjs.org/)
 
