@@ -2,6 +2,10 @@
 
 学习使用SVG、Canvas、Three.js进行绘图
 
+## Home Page
+
+![Home Page](img/home_page.png)
+
 ## 辅助工具
 
 * [SVG Online Editor](https://c.runoob.com/more/svgeditor/)
