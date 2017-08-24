@@ -5,7 +5,11 @@ function replaceAll(str, find, replace) {
 function show_nav_frame() {
     $.get('templates/nav.tmpl', function(src) {
         Handlebars.registerHelper('getFunctionName', function(object, options) {
-            return object[options.substr(0, options.lastIndexOf('_'))]["function_name"];  
+            return configs["nav"][options.substr(0, options.lastIndexOf("_"))]["function_name"];
+        });
+
+        Handlebars.registerHelper('getObjectValue', function(object, options) {
+            return options.fn(object[object["parts"][options.data.index]]);
         });
 
         var template = Handlebars.compile(src);
@@ -14,28 +18,26 @@ function show_nav_frame() {
     });
 }
 
-function clean_show_content_with_frame() {
+function clean_show_content_with_frame(frame_type, path_name) {
     // pre/code element with horizontal scrollbar breaks the flex layout on Firefox
     //     https://stackoverflow.com/questions/28896807/pre-code-element-with-horizontal-scrollbar-breaks-the-flex-layout-on-firefox#comment46053387_28896807
-    $.get('templates/svg/svg_frame.tmpl', function(src) {
-        var template = Handlebars.compile(src);
-        // var context = { name: "zhaoshuai", content: "learn Handlebars"};
-        // var html = template(context);
-        // $('#show-content').html(html);
-        $('#show-content').html(template());
+    if (frame_type == "SVG") {
+        $.get('templates/svg/svg_frame.tmpl', function(src) {
+            var template = Handlebars.compile(src);
+            // var context = { name: "zhaoshuai", content: "learn Handlebars"};
+            // var html = template(context);
+            // $('#show-content').html(html);
+            $('#show-content').html(template());
 
-        document.getElementById('code_content_container').style.height = window.screen.availHeight * 2 / 5 + "px";
-        document.getElementById('show-content_render').style.height = window.screen.availHeight / 3 + "px";
+            document.getElementById('code_content_container').style.height = window.screen.availHeight * 2 / 5 + "px";
+            document.getElementById('show-content_render').style.height = window.screen.availHeight / 3 + "px";
 
-        code_vertical_scrollbar = $("pre.code_vertical_scrollbar");
-        for( i = 0; i < code_vertical_scrollbar.length; i++ ) {
-            code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 2 / 5 + "px";
-        }
+            code_vertical_scrollbar = $("pre.code_vertical_scrollbar");
+            for( i = 0; i < code_vertical_scrollbar.length; i++ ) {
+                code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 2 / 5 + "px";
+            }
 
-        $.ajax({ 
-            async:false, 
-            url : "svg/javascript_control_svg_elemet.html", 
-            success : function(result){ 
+            $.get("svg/" + path_name + "/html/index.html", function(result) {
                 // show html
                 $('#show-content_render').html(result);
 
@@ -51,28 +53,29 @@ function clean_show_content_with_frame() {
                 $('pre code').each(function(i, block) {
                     hljs.highlightBlock(block);
                 });
-            } 
-        }); 
-    });
+            }); 
+        });
+    }
 }
 
 function SVG_frame_with_content(obj){ 
-    console.info(configs["nav"]["SVG"]["pages"][obj.innerHTML]);
-    clean_show_content_with_frame();
+    clean_show_content_with_frame("SVG", configs["nav"]["SVG"]["pages"][obj.innerHTML] + "_" + obj.innerHTML);
 } 
 
 function show_home_page(){ 
     $.ajax({ 
         async:false, 
         url : "home.html", 
-        success : function(result){ 
+        success : function(src){ 
             // show home.html
-            $('#show-content').html(result);
+            var template = Handlebars.compile(src);
+            $('#show-content').html(template({"title" : configs["title"]}));
         } 
     }); 
 } 
 
 $(function(){ 
     show_nav_frame();
+    show_home_page();
 });
 
