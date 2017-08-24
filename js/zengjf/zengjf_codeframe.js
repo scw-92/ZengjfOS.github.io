@@ -3,7 +3,7 @@ function replaceAll(str, find, replace) {
 }
 
 function show_nav_frame() {
-    $.get('templates/nav.tmpl', function(src) {
+    $.get('templates/nav.html', function(src) {
         Handlebars.registerHelper('getFunctionName', function(object, options) {
             return configs["nav"][options.substr(0, options.lastIndexOf("_"))]["function_name"];
         });
@@ -22,7 +22,7 @@ function clean_show_content_with_frame(frame_type, path_name) {
     // pre/code element with horizontal scrollbar breaks the flex layout on Firefox
     //     https://stackoverflow.com/questions/28896807/pre-code-element-with-horizontal-scrollbar-breaks-the-flex-layout-on-firefox#comment46053387_28896807
     if (frame_type == "SVG") {
-        $.get('templates/svg/svg_frame.tmpl', function(src) {
+        $.get('templates/svg/svg_frame.html', function(src) {
             var template = Handlebars.compile(src);
             // var context = { name: "zhaoshuai", content: "learn Handlebars"};
             // var html = template(context);
@@ -37,7 +37,7 @@ function clean_show_content_with_frame(frame_type, path_name) {
                 code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 2 / 5 + "px";
             }
 
-            $.get("svg/" + path_name + "/html/index.html", function(result) {
+            $.get("src/svg/" + path_name + "/html/index.html", function(result) {
                 // show html
                 $('#show-content_render').html(result);
 
@@ -77,5 +77,17 @@ function show_home_page(){
 $(function(){ 
     show_nav_frame();
     show_home_page();
+
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    });
+    console.log(marked('I am using __markdown__.'));
 });
 
