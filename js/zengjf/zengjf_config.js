@@ -9,7 +9,7 @@ var configs = {
         "SVG" : {
             "function_name" : "SVG_frame_with_content",
             "pages" : {
-                "javascript_control_svg_elemet" : "SVG_001",
+                "javascript_control_svg_element" : "SVG_001",
                 "javascript_control_svg" : "SVG_002"
             }
         },
