@@ -1,5 +1,8 @@
-function javascript_control_svg_element(json_data) {
-    console.info("javascript_control_svg_elemet: " + json_data["type"]);
+$(function(){ 
+    // highlightjs-line-numbers.js
+    // https://github.com/wcoder/highlightjs-line-numbers.js/
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
 
     var startAngle=0;
     var cx = 100;
@@ -24,4 +27,9 @@ function javascript_control_svg_element(json_data) {
     $("#test1").attr("d","M "+cx+","+cy+" L "+x0+","+y0+" A "+r+","+r+" 0 0,0 "+x1+","+y1+" Z");
     $("#test2").attr("d","M "+cx+","+cy+" L "+x1+","+y1+" A "+r+","+r+" 0 1,0 "+x2+","+y2+" Z");
     $("#test3").attr("d","M "+cx+","+cy+" L "+x2+","+y2+" A "+r+","+r+" 0 0,0 "+x3+","+y3+" Z");
+});
+
+// framework callback
+function javascript_control_svg_element(json_data) {
+    console.info("javascript_control_svg_elemet: " + json_data["type"]);
 }

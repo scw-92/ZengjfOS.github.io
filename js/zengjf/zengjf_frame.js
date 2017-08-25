@@ -38,16 +38,9 @@ function deal_with_SVG_job (frame_type, demo_name, path_name) {
             code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 1 / 3 + "px";
 
         $.get(demo_css, function(result) {
-
             // show source code, replace '<' and '>'
             result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
             $('#show-content_code_css').html(result);
-
-            // high light source code
-            $('pre code').each(function(i, block) {
-                hljs.highlightBlock(block);
-                hljs.lineNumbersBlock(block);
-            });
         }); 
 
         $.get(demo_html, function(result) {
@@ -57,12 +50,6 @@ function deal_with_SVG_job (frame_type, demo_name, path_name) {
             // show source code, replace '<' and '>'
             result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
             $('#show-content_code_html').html(result);
-
-            // high light source code
-            $('pre code').each(function(i, block) {
-                hljs.highlightBlock(block);
-                hljs.lineNumbersBlock(block);
-            });
 
             // finish html and get javascript to execute
             dynamic_get_script(demo_name, demo_js, {"type" : frame_type});
@@ -176,11 +163,6 @@ function dynamic_get_CSS (file_path) {
 }
 
 $(function(){ 
-    // highlightjs-line-numbers.js
-    // https://github.com/wcoder/highlightjs-line-numbers.js/
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-
     show_nav_frame();
 
     // demo string as a function call
