@@ -1,5 +1,5 @@
 var configs = {
-    "title" : "Web Drawing Demo",
+    "title" : "Web Drawing",
     "author" : "zengjf",
     "blog" : "http://www.cnblogs.com/zengjfgit/",
     "github" : "https://github.com/ZengjfOS",

@@ -29,12 +29,15 @@ function clean_show_content_with_frame(frame_type, path_name) {
             // $('#show-content').html(html);
             $('#show-content').html(template());
 
-            document.getElementById('code_content_container').style.height = window.screen.availHeight * 2 / 5 + "px";
-            document.getElementById('show-content_render').style.height = window.screen.availHeight / 3 + "px";
+            // document.getElementById('code_content_container').style.height = window.screen.availHeight * 2 / 5 + "px";
+            code_content_container = $(".code_content_container");
+            for( i = 0; i < code_content_container.length; i++ ) {
+                code_content_container[i].style.maxHeight = window.screen.availHeight * 4 / 9 + "px";
+            }
 
             code_vertical_scrollbar = $("pre.code_vertical_scrollbar");
             for( i = 0; i < code_vertical_scrollbar.length; i++ ) {
-                code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 2 / 5 + "px";
+                code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 1 / 3 + "px";
             }
 
             $.get("src/svg/" + path_name + "/html/index.html", function(result) {
