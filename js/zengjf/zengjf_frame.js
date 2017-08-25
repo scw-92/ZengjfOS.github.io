@@ -4,10 +4,6 @@ function replaceAll(str, find, replace) {
 
 function show_nav_frame() {
     $.get('templates/nav.html', function(src) {
-        Handlebars.registerHelper('getFunctionName', function(object, options) {
-            return configs["nav"][options.substr(0, options.lastIndexOf("_"))]["function_name"];
-        });
-
         Handlebars.registerHelper('getObjectValue', function(object, options) {
             return options.fn(object[object["parts"][options.data.index]]);
         });
@@ -18,97 +14,96 @@ function show_nav_frame() {
     });
 }
 
-function clean_show_content_with_frame(frame_type, demo_name, path_name) {
-    // pre/code element with horizontal scrollbar breaks the flex layout on Firefox
-    //     https://stackoverflow.com/questions/28896807/pre-code-element-with-horizontal-scrollbar-breaks-the-flex-layout-on-firefox#comment46053387_28896807
-    if (frame_type == "SVG") {
+function deal_with_SVG_job (frame_type, demo_name, path_name) {
+    demo_css  = 'src/' + frame_type + '/' + path_name + '/demo.css';
+    demo_js   = 'src/' + frame_type + '/' + path_name + '/demo.js';
+    demo_html = 'src/' + frame_type + '/' + path_name + '/demo.html';
 
-        dynamic_get_CSS('src/' + frame_type + '/' + path_name + '/demo.css');
-        dynamic_get_CSS('templates/' + frame_type + '/svg_frame.css');
+    template_css  = 'templates/' + frame_type + '/svg_frame.css';
+    template_html = 'templates/' + frame_type + '/svg_frame.html';
 
-        $.get('templates/' + frame_type + '/svg_frame.html', function(src) {
-            var template = Handlebars.compile(src);
-            $('#show-content').html(template());
+    dynamic_get_CSS(demo_css);
+    dynamic_get_CSS(template_css);
 
-            code_content_container = $(".code_content_container");
-            for( i = 0; i < code_content_container.length; i++ ) {
-                code_content_container[i].style.maxHeight = window.screen.availHeight * 4 / 9 + "px";
-            }
+    $.get(template_html, function(src) {
+        var template = Handlebars.compile(src);
+        $('#show-content').html(template());
 
-            code_vertical_scrollbar = $("pre.code_vertical_scrollbar");
-            for( i = 0; i < code_vertical_scrollbar.length; i++ ) {
-                code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 1 / 3 + "px";
-            }
+        code_content_container = $(".code_content_container");
+        for( i = 0; i < code_content_container.length; i++ ) 
+            code_content_container[i].style.maxHeight = window.screen.availHeight * 4 / 9 + "px";
 
-            $.get("src/" + frame_type + "/" + path_name + "/demo.html", function(result) {
-                // show html
-                $('#show-content_render').html(result);
+        code_vertical_scrollbar = $("pre.code_vertical_scrollbar");
+        for( i = 0; i < code_vertical_scrollbar.length; i++ ) 
+            code_vertical_scrollbar[i].style.maxHeight = window.screen.availHeight * 1 / 3 + "px";
 
-                // show source code, replace '<' and '>'
-                result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
-                $('#show-content_code_html').html(result);
+        $.get(demo_css, function(result) {
 
-                // high light source code
-                $('pre code').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
+            // show source code, replace '<' and '>'
+            result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
+            $('#show-content_code_css').html(result);
 
-                // finish html and get javascript to execute
-                dynamic_get_script(frame_type, demo_name, path_name, "demo.js");
-            }); 
+            // high light source code
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+        }); 
 
-            $.get("src/" + frame_type + "/" + path_name + "/demo.css", function(result) {
-
-                // show source code, replace '<' and '>'
-                result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
-                $('#show-content_code_css').html(result);
-
-                // high light source code
-                $('pre code').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
-            }); 
-
-            $.get("src/" + frame_type + "/" + path_name + "/demo.js", function(result) {
-
-                // show source code, replace '<' and '>'
-                result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
-                $('#show-content_code_js').html(result);
-
-                // high light source code
-                $('pre code').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
-            }); 
-        });
-    } else if (frame_type == "Show_Time") {
-
-        dynamic_get_CSS('src/' + frame_type + '/' + path_name + '/demo.css');
-
-        $.get("src/" + frame_type + "/" + path_name + "/demo.html", function(result) {
+        $.get(demo_html, function(result) {
             // show html
-            $('#show-content').html(result);
+            $('#show-content_render').html(result);
+
+            // show source code, replace '<' and '>'
+            result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
+            $('#show-content_code_html').html(result);
+
+            // high light source code
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
 
             // finish html and get javascript to execute
-            dynamic_get_script(frame_type, demo_name, path_name, "demo.js");
+            dynamic_get_script(demo_name, demo_js, {"type" : frame_type});
         }); 
-    }
+    });
 }
 
-function SVG_frame_with_content(obj){ 
-    // path_name = type + index + demo_name;
-    demo_name = obj.innerHTML;
-    path_name = configs["nav"]["SVG"]["pages"][obj.innerHTML] + "_" + obj.innerHTML;
+function deal_with_Show_Time_job (frame_type, demo_name, path_name) {
+    demo_css  = 'src/' + frame_type + '/' + path_name + '/demo.css';
+    demo_js   = 'src/' + frame_type + '/' + path_name + '/demo.js';
+    demo_html = 'src/' + frame_type + '/' + path_name + '/demo.html';
 
-    clean_show_content_with_frame("SVG", demo_name, path_name);
+    dynamic_get_CSS(demo_css);
+
+    $.get(demo_html, function(result) {
+        // show html
+        $('#show-content').html(result);
+
+        // finish html and get javascript to execute
+        dynamic_get_script(demo_name, demo_js, {"type" : frame_type});
+    }); 
 }
 
-function Show_Time_frame_with_content(obj){ 
-    // path_name = type + index + demo_name;
-    demo_name = obj.innerHTML;
-    path_name = configs["nav"]["Show_Time"]["pages"][obj.innerHTML] + "_" + obj.innerHTML;
+function deal_with_About_job (frame_type, demo_name, path_name) {
+    console.info(arguments.callee.name);
+}
 
-    clean_show_content_with_frame("Show_Time", demo_name, path_name);
+function show_content_with_frame(frame_type, demo_name, path_name) {
+    // pre/code element with horizontal scrollbar breaks the flex layout on Firefox
+    //     https://stackoverflow.com/questions/28896807/pre-code-element-with-horizontal-scrollbar-breaks-the-flex-layout-on-firefox#comment46053387_28896807
+    function_name = "deal_with_" + frame_type + "_job";
+    var fn = window[function_name]; 
+    if(typeof fn === 'function') 
+        fn(frame_type, demo_name, path_name);
+}
+
+function nav_click_search_content(obj){ 
+    frame_type = obj.parentNode.parentNode.parentNode.getElementsByTagName("a")[0].text;
+    demo_name  = obj.innerHTML;
+    // path_name = type + index + demo_name;
+    path_name  = configs["nav"][frame_type]["pages"][obj.innerHTML] + "_" + obj.innerHTML;
+
+    show_content_with_frame(frame_type, demo_name, path_name);
 }
 
 function show_home_page(){ 
@@ -116,7 +111,7 @@ function show_home_page(){
         async:false, 
         url : "home_page.html", 
         success : function(src){ 
-            // show home.html
+            // show home_page.html
             var template = Handlebars.compile(src);
             $('#show-content').html(template({"title" : configs["title"]}));
         } 
@@ -125,21 +120,20 @@ function show_home_page(){
 
 function footer_position(){
     $("footer").removeClass("fixed-bottom");
+
     var contentHeight = document.body.scrollHeight, //网页正文全文高度
         winHeight = window.innerHeight;             //可视窗口高度，不包括浏览器顶部工具栏
-
     if(!(contentHeight > winHeight)){
         //当网页正文高度小于可视窗口高度时，为footer添加类fixed-bottom
         $("footer").addClass("fixed-bottom");
     }
 }
 
-function call_string_function(function_name) {
+function call_string_function(function_name, json_data) {
     // string as a function call
     var fn = window[function_name]; 
-    if(typeof fn === 'function') {
-        fn();
-    }
+    if(typeof fn === 'function') 
+        fn(json_data);
 }
 
 // dynamic get javascript and run the demo_name function in script file.
@@ -151,17 +145,32 @@ jQuery.loadScript = function (url, callback) {
         async: true
     });
 }
-function dynamic_get_script(type, demo_name, path_name, file_name) {
-    if (typeof someObject == 'undefined') $.loadScript("src/" + type + "/" + path_name + '/' + file_name, function(){
+function dynamic_get_script(demo_name, demo_js, json_data) {
+
+    if (typeof someObject == 'undefined') $.loadScript(demo_js, function(result){
+        // check for show js code
+        show_code_js = $('#show-content_code_js');
+        if (show_code_js) {
+            show_code_js.html(result);
+
+            // show source code, replace '<' and '>'
+            result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
+            $('#show-content_code_js').html(result);
+
+            // high light source code
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+        }
+
         //Stuff to do after someScript has loaded
-        call_string_function(demo_name);
+        call_string_function(demo_name, json_data);
     });
 }
 
 function dynamic_get_CSS (file_path) {
     $('head').append('<link rel="stylesheet" type="text/css" href="' + file_path + '">');
 }
-
 
 $(function(){ 
     show_nav_frame();

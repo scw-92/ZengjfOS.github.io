@@ -1,5 +1,5 @@
-function javascript_control_svg_element() {
-    console.info("javascript_control_svg_elemet");
+function javascript_control_svg_element(json_data) {
+    console.info("javascript_control_svg_elemet: " + json_data["type"]);
 
     var startAngle=0;
     var cx = 100;
