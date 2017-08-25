@@ -30,7 +30,7 @@ var configs = {
         "Show_Time" : {
             "function_name" : "Show_Time_frame_with_content",
             "pages" : {
-                // "javascript_control_svg_elemet" : "Show_Time_001",
+                "serial_assistant" : "Show_Time_001",
                 // "javascript_control_svg" : "Show_Time_002"
             }
         },

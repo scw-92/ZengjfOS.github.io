@@ -10,6 +10,7 @@
 
 * [SVG Online Editor](https://c.runoob.com/more/svgeditor/)
 * [bootstrap Layout Editor](http://www.runoob.com/try/bootstrap/layoutit/)
+* [bootstrap Layout Editor: bootply](https://www.bootply.com/new?visual=1)
 
 ## 辅助插件
 

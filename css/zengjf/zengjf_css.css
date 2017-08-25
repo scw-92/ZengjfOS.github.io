@@ -1,28 +1,16 @@
-.show_content_render_div {
-  padding-left: 20px;
-  padding-right: 20px;
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+.show_div_border {
+  border-radius: 10px;
+  border: 1px solid #ddd;
  }
 
- .code_vertical_scrollbar {
-  max-height: 300px;
-  padding: 0px;
-  margin-top: 10px;
- }
-
- .code_horizontal_scrollbar {
-  overflow: auto; 
-  -ms-word-wrap: normal; 
-  word-wrap: normal; 
-  overflow-wrap: normal; 
-  white-space: pre; 
- }
-
- /* 动态为footer添加类fixed-bottom */
+/* 动态为footer添加类fixed-bottom */
 .fixed-bottom {
   position: fixed;
-  bottom: 0;width:100%;
+  bottom: 0;
+  width:100%;
+}
+
+.user_table td {
+   text-align: center;   
+   vertical-align: middle;
 }

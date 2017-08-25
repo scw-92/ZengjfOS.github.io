@@ -1,0 +1,161 @@
+<div class="row clearfix">
+  <div class="col-md-12 column">
+    <div class="row clearfix">
+      <div class="col-md-4 column">
+        <div class="row clearfix">
+          <div class="show_div_border col-md-12 column">
+            <div>
+              <h4>Serial Port Settings<h4>
+            </div>
+            <hr />
+            <table class="table user_table">
+              <tbody>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput1" >Serial Port:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                        <option>ttymxc1</option>
+                        <option>ttymxc2</option>
+                        <option>ttymxc3</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput2" >Baudrate:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput3" >Data Bits:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput4" >Parity Bits:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput5" >Stop Bits:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-md-4">
+                    <label for="serialPortInput5" >Flow CTRL:</label>
+                  </td>
+                  <td class="col-md-8">
+                    <div class="btn-group">
+                      <select class="form-control">
+                        <option>ttymxc0</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="col-md-12 column">
+               <button type="button" class="btn btn-default active btn-block btn-success" style="margin-bottom: 10px;">Open</button>
+            </div>
+          </div>
+          <div class="show_div_border col-md-12 column">
+            <div>
+              <h4>Receive Settings<h4>
+            </div>
+            <hr />
+            <div class="radio text-center">
+              <label class="col-md-6"><input type="radio" name="optradio" checked="checked">ASCII</label>
+              <label class="col-md-6"><input type="radio" name="optradio">HEX</label>
+            </div>
+            <br />
+            <hr />
+            <div class="checkbox" style="margin-bottom: 60px;">
+              <label class="col-md-4"><input type="checkbox" value="">Line Wrap</label>
+              <label class="col-md-4"><input type="checkbox" value="">Show Send</label>
+              <label class="col-md-4"><input type="checkbox" value="">Show Time</label>
+            </div>
+          </div>
+          <div class="show_div_border col-md-12 column">
+            <div>
+              <h4>Send Settings<h4>
+            </div>
+            <hr />
+            <div class="radio text-center">
+              <label class="col-md-6"><input type="radio" name="optradio" checked="checked">ASCII</label>
+              <label class="col-md-6"><input type="radio" name="optradio">HEX</label>
+            </div>
+            <br />
+            <hr />
+            <div class="checkbox" style="margin-bottom: 60px;">
+                <label class="col-md-5">
+                    <input type="checkbox" value="">Repeat Interval:
+                </label>
+                <label class="col-md-5">
+                    <input type="input" class="form-control"/> 
+                </label>
+                <label class="col-md-2">ms</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 column show_div_border">
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <div>
+              <h4>Receive Content</h4>
+            </div>
+            <div class="form-group"> 
+              <textarea class="form-control" rows="25"></textarea> 
+            </div> 
+          </div>
+        </div>
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <div>
+              <h4>Send Content</h4>
+            </div>
+            <div class="form-group"> 
+              <textarea class="form-control" rows="5"></textarea> 
+            </div> 
+          </div>
+          <div class="col-md-12 column text-center">
+            <button type="button" class="btn btn-default active btn-block btn-success" style="margin-bottom: 10px;">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
