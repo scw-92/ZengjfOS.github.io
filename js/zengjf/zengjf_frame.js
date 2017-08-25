@@ -46,6 +46,7 @@ function deal_with_SVG_job (frame_type, demo_name, path_name) {
             // high light source code
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
             });
         }); 
 
@@ -60,6 +61,7 @@ function deal_with_SVG_job (frame_type, demo_name, path_name) {
             // high light source code
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
             });
 
             // finish html and get javascript to execute
@@ -160,6 +162,7 @@ function dynamic_get_script(demo_name, demo_js, json_data) {
             // high light source code
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
             });
         }
 
@@ -173,6 +176,11 @@ function dynamic_get_CSS (file_path) {
 }
 
 $(function(){ 
+    // highlightjs-line-numbers.js
+    // https://github.com/wcoder/highlightjs-line-numbers.js/
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+
     show_nav_frame();
 
     // demo string as a function call
