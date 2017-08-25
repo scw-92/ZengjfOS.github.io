@@ -1,4 +1,4 @@
-function javascript_control_svg_elemet() {
+function javascript_control_svg_element() {
     console.info("javascript_control_svg_elemet");
 
     var startAngle=0;

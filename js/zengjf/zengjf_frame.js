@@ -114,7 +114,6 @@ function call_string_function(function_name) {
     // string as a function call
     var fn = window[function_name]; 
     if(typeof fn === 'function') {
-        // console.info(fn);
         fn();
     }
 }
