@@ -56,6 +56,30 @@ function clean_show_content_with_frame(frame_type, demo_name, path_name) {
                 // finish html and get javascript to execute
                 dynamic_get_script(frame_type, demo_name, path_name, "demo.js");
             }); 
+
+            $.get("src/" + frame_type + "/" + path_name + "/demo.css", function(result) {
+
+                // show source code, replace '<' and '>'
+                result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
+                $('#show-content_code_css').html(result);
+
+                // high light source code
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            }); 
+
+            $.get("src/" + frame_type + "/" + path_name + "/demo.js", function(result) {
+
+                // show source code, replace '<' and '>'
+                result = replaceAll(replaceAll(result, "<", "&lt;"), ">", "&gt;");
+                $('#show-content_code_js').html(result);
+
+                // high light source code
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            }); 
         });
     } else if (frame_type == "Show_Time") {
 

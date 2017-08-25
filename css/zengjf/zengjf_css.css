@@ -1,8 +1,3 @@
-.show_div_border {
-  border-radius: 10px;
-  border: 1px solid #ddd;
- }
-
 /* 动态为footer添加类fixed-bottom */
 .fixed-bottom {
   position: fixed;
@@ -10,7 +5,4 @@
   width:100%;
 }
 
-.user_table td {
-   text-align: center;   
-   vertical-align: middle;
-}
+
