@@ -73,7 +73,7 @@ var configs = {
                 "README.md" : {
                     "type" : "html",
                     "markdown" : "url",
-                    "url" : "https://github.com/ZengjfOS/ZengjfOS.github.io/blob/master/README.md"
+                    "url" : "http://zorozeng.com/README.md"
                 }
             }
         }
