@@ -156,7 +156,7 @@ function nav_click_search_content(obj){
 function show_home_page(){ 
     $.ajax({ 
         async:false, 
-        url : "home_page.html", 
+        url : "templates/home_page.html", 
         success : function(src){ 
             // show home_page.html
             var template = Handlebars.compile(src);
