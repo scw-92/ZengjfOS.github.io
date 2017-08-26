@@ -8,8 +8,10 @@ var configs = {
         "parts" : ["SVG", "Canvas", "Three_js", "Show_Time", "My_Girl", "Keep_Walk", "About"],
         "SVG" : {
             "pages" : {
-                "javascript_control_svg_element" : "001",
-                "javascript_control_svg" : "002"
+                "javascript_control_svg_element" : {
+                    "index" : "001",
+                    "type" : "html"
+                }
             }
         },
         "Canvas" : {
@@ -22,7 +24,10 @@ var configs = {
         },
         "Show_Time" : {
             "pages" : {
-                "serial_assistant" : "001",
+                "serial_assistant" : {
+                    "index" : "001",
+                    "type" : "html"
+                }
             }
         },
         "My_Girl" : {
@@ -35,7 +40,41 @@ var configs = {
         },
         "About" : {
             "pages" : {
-                "web_page_info" : "001",
+                "divider1" : {
+                    "type" : "divider",
+                },
+                "Personal Blog" : {
+                    "type" : "linker",
+                    "url" : "http://www.cnblogs.com/zengjfgit/"
+                },
+                "GitHub Account" : {
+                    "type" : "linker",
+                    "url" : "https://github.com/ZengjfOS"
+                },
+                "GitHub Repository" : {
+                    "type" : "linker",
+                    "url" : "https://github.com/ZengjfOS/ZengjfOS.github.io"
+                },
+                "divider2" : {
+                    "type" : "divider",
+                },
+                "Website_WolkFow" : {
+                    "type" : "linker",
+                    "url" : "#"
+                },
+                "Configuration_Information" : {
+                    "type" : "linker",
+                    "url" : "#"
+                },
+                "Website_Information" : {
+                    "type" : "html",
+                    "index" : "001",
+                },
+                "README.md" : {
+                    "type" : "html",
+                    "markdown" : "url",
+                    "url" : "https://github.com/ZengjfOS/ZengjfOS.github.io/blob/master/README.md"
+                }
             }
         }
     }

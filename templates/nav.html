@@ -7,9 +7,21 @@
     <ul class="dropdown-menu">
       {{#getObjectValue ../ this}}
       {{#each pages}}
+      {{#ifCond type 'linker'}}
+      <li>
+        <a href="{{url}}">{{@key}}</a>
+      {{/ifCond}}
+
+      {{#ifCond type 'html'}}
       <li>
         <a href="javascript:void(0);" onclick="nav_click_search_content(this)">{{@key}}</a>
-      </li>
+      {{/ifCond}}
+
+      {{#ifCond type 'divider'}}
+      <li class="divider">
+      {{/ifCond}}
+
+	  </li>
       {{/each}}
       {{/getObjectValue}}
     </ul>

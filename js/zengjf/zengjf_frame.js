@@ -8,6 +8,15 @@ function show_nav_frame() {
             return options.fn(object[object["parts"][options.data.index]]);
         });
 
+        // Logical operator in a handlebars.js {{#if}} conditional
+        //   https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
+        Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+            if(v1 === v2) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        });
+
         var template = Handlebars.compile(src);
         $('#bs-example-navbar-collapse-1').html(template(configs["nav"]));
 
@@ -75,6 +84,25 @@ function deal_with_Show_Time_job (frame_type, demo_name, path_name) {
 
 function deal_with_About_job (frame_type, demo_name, path_name) {
     console.info(arguments.callee.name);
+
+    if (IsURL(current_page['url'])) {
+        readme_md = path_name;
+    } else {
+        readme_md  = 'src/' + frame_type + '/' + path_name + '/README.md';
+    }
+
+    template_css  = 'templates/' + frame_type + '/about_frame.css';
+    template_html = 'templates/' + frame_type + '/about_frame.html';
+
+    dynamic_get_CSS(template_css);
+
+    $.get(template_html, function(src) {
+        $('#show-content').html(src);
+
+        $.get(readme_md, function(result) {
+            $("#mardown-body_content").html(marked(result));
+        }); 
+    }); 
 }
 
 function show_content_with_frame(frame_type, demo_name, path_name) {
@@ -86,13 +114,32 @@ function show_content_with_frame(frame_type, demo_name, path_name) {
         fn(frame_type, demo_name, path_name);
 }
 
+function IsURL(str_url){
+    var strRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+
+    var re=new RegExp(strRegex); 
+    if (re.test(str_url))
+        return (true); 
+    else
+        return (false); 
+}
+
 function nav_click_search_content(obj){ 
     frame_type = obj.parentNode.parentNode.parentNode.getElementsByTagName("a")[0].text;
     demo_name  = obj.innerHTML;
-    // path_name = type + index + demo_name;
-    path_name  = configs["nav"][frame_type]["pages"][obj.innerHTML] + "_" + obj.innerHTML;
+    current_page = configs["nav"][frame_type]["pages"][obj.innerHTML];
 
-    show_content_with_frame(frame_type, demo_name, path_name);
+    console.info(current_page);
+    if (current_page.hasOwnProperty('markdown') 
+            && current_page['markdown'] == "url") {
+        show_content_with_frame(frame_type, demo_name, current_page['url']);
+    } else {
+        // path_name = type + index + demo_name;
+        path_name  = current_page["index"] + "_" + obj.innerHTML;
+        show_content_with_frame(frame_type, demo_name, path_name);
+    }
+
+
 }
 
 function show_home_page(){ 
@@ -182,6 +229,5 @@ $(function(){
         smartLists: true,
         smartypants: false
     });
-    console.log(marked('I am using __markdown__.'));
 });
 
