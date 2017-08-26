@@ -97,11 +97,24 @@ function deal_with_About_job (frame_type, demo_name, path_name) {
     dynamic_get_CSS(template_css);
 
     $.get(template_html, function(src) {
-        $('#show-content').html(src);
+        var template = Handlebars.compile(src);
+        $('#show-content').html(template({"title" : demo_name}));
 
         $.get(readme_md, function(result) {
-            $("#mardown-body_content").html(marked(result));
-        }); 
+            subfix = readme_md.split('.').pop();
+
+            if (subfix == "md") {
+                $("#markdown-body_content").html(marked(result));
+            } else if (subfix == "html") {
+                $("#markdown-body_content").html(result);
+            }
+
+            // high light source code
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
+            });
+        });
     }); 
 }
 
@@ -138,8 +151,6 @@ function nav_click_search_content(obj){
         path_name  = current_page["index"] + "_" + obj.innerHTML;
         show_content_with_frame(frame_type, demo_name, path_name);
     }
-
-
 }
 
 function show_home_page(){ 

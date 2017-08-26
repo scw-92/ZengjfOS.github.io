@@ -5,9 +5,14 @@ var configs = {
     "github" : "https://github.com/ZengjfOS",
     "version" : "0.0.1",
     "nav" : {
+        // 列表的形式体现导航栏有多少项，模板中用来迭代下面的每一项
         "parts" : ["SVG", "Canvas", "Three_js", "Show_Time", "My_Girl", "Keep_Walk", "About"],
         "SVG" : {
             "pages" : {
+                /**
+                 * 对于type是html类型且需要渲染的的page来说，文件夹的名称是$(index)_$(key)，例如：
+                 * 001_javascript_control_svg_element = $(index)(0001)_$(key)(javascript_control_svg_element)
+                 */
                 "javascript_control_svg_element" : {
                     "index" : "001",
                     "type" : "html"
@@ -40,9 +45,15 @@ var configs = {
         },
         "About" : {
             "pages" : {
+                /**
+                 * type为divider的类型为分隔符
+                 */
                 "divider1" : {
                     "type" : "divider",
                 },
+                /**
+                 * type为linker的类型为直接的页面链接
+                 */
                 "Personal Blog" : {
                     "type" : "linker",
                     "url" : "http://www.cnblogs.com/zengjfgit/"
@@ -58,17 +69,23 @@ var configs = {
                 "divider2" : {
                     "type" : "divider",
                 },
-                "Website_WolkFow" : {
-                    "type" : "linker",
-                    "url" : "#"
+                /**
+                 * 对于type是html类型直接html或者Markdown文档，直接用网址
+                 */
+                "Website_WolkFlow" : {
+                    "type" : "html",
+                    "markdown" : "url",
+                    "url" : "http://zorozeng.com/docs/001_WebSite_WorkFlow.html"
                 },
                 "Configuration_Information" : {
-                    "type" : "linker",
-                    "url" : "#"
+                    "type" : "html",
+                    "markdown" : "url",
+                    "url" : "http://zorozeng.com/docs/002_Configuration_Information.md"
                 },
                 "Website_Information" : {
                     "type" : "html",
-                    "index" : "001",
+                    "markdown" : "url",
+                    "url" : "http://zorozeng.com/docs/003_Website_Information.md"
                 },
                 "README.md" : {
                     "type" : "html",
