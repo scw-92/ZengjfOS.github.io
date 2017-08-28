@@ -4,10 +4,21 @@ var configs = {
     "blog" : "http://www.cnblogs.com/zengjfgit/",
     "github" : "https://github.com/ZengjfOS",
     "version" : "0.0.1",
+    "home_page" : {
+        "show" : true,
+        "Show_Time" : {
+            "pages" : {
+                "serial_assistant" : {
+                    "index" : "001",
+                    "type" : "html"
+                }
+            }
+        }
+    },
     "nav" : {
         // 列表的形式体现导航栏有多少项，模板中用来迭代下面的每一项
-        "parts" : ["SVG", "Canvas", "Three_js", "Show_Time", "My_Girl", "Keep_Walk", "About"],
-        "SVG" : {
+        "parts" : ["Demo_Analysis", "Show_Time", "My_Girl", "Keep_Walk", "About"],
+        "Demo_Analysis" : {
             "pages" : {
                 /**
                  * 对于type是html类型且需要渲染的的page来说，文件夹的名称是$(index)_$(key)，例如：
@@ -17,14 +28,6 @@ var configs = {
                     "index" : "001",
                     "type" : "html"
                 }
-            }
-        },
-        "Canvas" : {
-            "pages" : {
-            }
-        },
-        "Three_js" : {
-            "pages" : {
             }
         },
         "Show_Time" : {

@@ -23,7 +23,7 @@ function show_nav_frame() {
     });
 }
 
-function deal_with_SVG_job (frame_type, demo_name, path_name) {
+function deal_with_Demo_Analysis_job (frame_type, demo_name, path_name) {
     demo_css  = 'src/' + frame_type + '/' + path_name + '/demo.css';
     demo_js   = 'src/' + frame_type + '/' + path_name + '/demo.js';
     demo_html = 'src/' + frame_type + '/' + path_name + '/demo.html';
@@ -154,15 +154,30 @@ function nav_click_search_content(obj){
 }
 
 function show_home_page(){ 
-    $.ajax({ 
-        async:false, 
-        url : "templates/home_page.html", 
-        success : function(src){ 
-            // show home_page.html
-            var template = Handlebars.compile(src);
-            $('#show-content').html(template({"title" : configs["title"]}));
-        } 
-    }); 
+    
+    if (configs.hasOwnProperty('home_page')
+            && configs['home_page'].hasOwnProperty('show')
+            && configs['home_page']['show']) {
+
+        _.each(configs['home_page'], (val_e, key_e) => {
+            frame_type = key_e;
+            _.each(val_e["pages"], (val_i, key_i) => {
+                demo_name = key_i;
+                path_name = val_i["index"] + "_" + demo_name;
+                show_content_with_frame(frame_type, demo_name, path_name);
+            });
+        });
+    } else {
+        $.ajax({ 
+            async:false, 
+            url : "templates/home_page.html", 
+            success : function(src){ 
+                // show home_page.html
+                var template = Handlebars.compile(src);
+                $('#show-content').html(template({"title" : configs["title"]}));
+            } 
+        }); 
+    }
 } 
 
 function footer_position(){
@@ -220,6 +235,26 @@ function dynamic_get_CSS (file_path) {
     $('head').append('<link rel="stylesheet" type="text/css" href="' + file_path + '">');
 }
 
+class Zengjf_utils {
+    constructor() {
+        console.info("Zengjf_utils constructor");
+    }
+
+}
+
+class ZengjfOS extends Zengjf_utils{
+
+    constructor(options) {
+        var defaults = { validate: false, limit: 5, name: "foo" };
+ 
+        // Merge defaults and options, without modifying defaults
+        var settings = $.extend({}, defaults, options ||{});
+
+        super()
+    }
+
+}
+
 $(function(){ 
     show_nav_frame();
 
@@ -240,5 +275,7 @@ $(function(){
         smartLists: true,
         smartypants: false
     });
+
+    zengjfos = new ZengjfOS();
 });
 
