@@ -17,6 +17,13 @@ var configs = {
     },
     "nav" : {
         // 列表的形式体现导航栏有多少项，模板中用来迭代下面的每一项
+        "maps" : [
+            {"Web绘图分析": "Demo_Analysis"}, 
+            {"示例演示": "Show_Time"}, 
+            {"My_Girl": "My_Girl"}, 
+            {"持续学习": "Keep_Walk"}, 
+            {"关于本站": "About"}
+        ],
         "parts" : ["Demo_Analysis", "Show_Time", "My_Girl", "Keep_Walk", "About"],
         "Demo_Analysis" : {
             "pages" : {
