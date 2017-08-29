@@ -4,22 +4,8 @@ function replaceAll(str, find, replace) {
 
 function show_nav_frame() {
     $.get('templates/nav.html', function(src) {
-        Handlebars.registerHelper('getObjectValue', function(object, options) {
-            return options.fn(object[object["parts"][options.data.index]]);
-        });
-
-        // Logical operator in a handlebars.js {{#if}} conditional
-        //   https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
-        Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-            if(v1 === v2) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
-        });
-
-        var template = Handlebars.compile(src);
-        $('#bs-example-navbar-collapse-1').html(template(configs["nav"]));
-
+        var template = _.template(src);
+        $('#bs-example-navbar-collapse-1').html(template({"nav":configs["nav"]}));
     });
 }
 
@@ -35,7 +21,7 @@ function deal_with_Demo_Analysis_job (frame_type, demo_name, path_name) {
     dynamic_get_CSS(template_css);
 
     $.get(template_html, function(src) {
-        var template = Handlebars.compile(src);
+        var template = _.template(src);
         $('#show-content').html(template());
 
         code_content_container = $(".code_content_container");
@@ -97,7 +83,7 @@ function deal_with_About_job (frame_type, demo_name, path_name) {
     dynamic_get_CSS(template_css);
 
     $.get(template_html, function(src) {
-        var template = Handlebars.compile(src);
+        var template = _.template(src);
         $('#show-content').html(template({"title" : demo_name}));
 
         $.get(readme_md, function(result) {
@@ -137,8 +123,20 @@ function IsURL(str_url){
         return (false); 
 }
 
+function getNavigationMapsValue(map_key) {
+    var value = "";
+
+    _.each(configs.nav.maps, (item, key, list) => {
+        if (_.keys(item)[0] == map_key) {
+            value = (item[map_key]);
+        }
+    });
+
+    return value;
+}
+
 function nav_click_search_content(obj){ 
-    frame_type = obj.parentNode.parentNode.parentNode.getElementsByTagName("a")[0].text;
+    frame_type = getNavigationMapsValue(obj.parentNode.parentNode.parentNode.getElementsByTagName("a")[0].text);
     demo_name  = obj.innerHTML;
     current_page = configs["nav"][frame_type]["pages"][obj.innerHTML];
 
@@ -173,7 +171,7 @@ function show_home_page(){
             url : "templates/home_page.html", 
             success : function(src){ 
                 // show home_page.html
-                var template = Handlebars.compile(src);
+                var template = _.template(src);
                 $('#show-content').html(template({"title" : configs["title"]}));
             } 
         }); 

@@ -20,11 +20,11 @@ var configs = {
         "maps" : [
             {"Web绘图分析": "Demo_Analysis"}, 
             {"示例演示": "Show_Time"}, 
-            {"My_Girl": "My_Girl"}, 
+            /* {"My_Girl": "My_Girl"}, */
             {"持续学习": "Keep_Walk"}, 
             {"关于本站": "About"}
         ],
-        "parts" : ["Demo_Analysis", "Show_Time", "My_Girl", "Keep_Walk", "About"],
+        "parts" : ["Demo_Analysis", "Show_Time", /* "My_Girl",*/ "Keep_Walk", "About"],
         "Demo_Analysis" : {
             "pages" : {
                 /**
