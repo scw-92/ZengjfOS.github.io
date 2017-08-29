@@ -275,5 +275,26 @@ $(function(){
     });
 
     zengjfos = new ZengjfOS();
+
+    // This will initialize the plugin 
+    // and show two dialog boxes: one with the text "Olá World"
+    // and other with the text "Good morning John!" 
+    jQuery.i18n.properties({
+        name:'lang', 
+        path:'language/', 
+        mode:'both',
+        language:'zh',
+        async: true,
+        callback: function() {
+            // We specified mode: 'both' so translated values will be
+            // available as JS vars/functions and as a map
+
+            // Accessing a simple value through the map
+            console.info(jQuery.i18n.prop('title'));
+
+            // Accessing a simple value through a JS variable
+            console.info(title);
+        }
+    });
 });
 
