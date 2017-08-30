@@ -51,7 +51,7 @@ var configs = {
         },
         "Keep_Walk" : {
             "pages" : {
-                "AM335x_Ext_Interfaces" : {
+                "AM335x_i.MX6DL_Ext_Interfaces" : {
                     "index" : "001",
                     "type" : "html",
                 },
