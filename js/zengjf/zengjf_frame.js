@@ -104,9 +104,44 @@ function deal_with_About_job (frame_type, demo_name, path_name) {
     }); 
 }
 
+function deal_with_Keep_Walk_job (frame_type, demo_name, path_name) {
+    console.info(arguments.callee.name);
+
+    readme_md  = 'src/' + frame_type + '/' + path_name + '/README.md';
+
+    console.info(readme_md);    
+
+    template_css  = 'templates/' + frame_type + '/about_frame.css';
+    template_html = 'templates/' + frame_type + '/about_frame.html';
+
+    dynamic_get_CSS(template_css);
+
+    $.get(template_html, function(src) {
+        var template = _.template(src);
+        $('#show-content').html(template({"title" : demo_name}));
+
+        $.get(readme_md, function(result) {
+            subfix = readme_md.split('.').pop();
+
+            if (subfix == "md") {
+                $("#markdown-body_content").html(marked(result));
+            } else if (subfix == "html") {
+                $("#markdown-body_content").html(result);
+            }
+
+            // high light source code
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
+            });
+        });
+    }); 
+}
+
 function show_content_with_frame(frame_type, demo_name, path_name) {
     // pre/code element with horizontal scrollbar breaks the flex layout on Firefox
     //     https://stackoverflow.com/questions/28896807/pre-code-element-with-horizontal-scrollbar-breaks-the-flex-layout-on-firefox#comment46053387_28896807
+
     function_name = "deal_with_" + frame_type + "_job";
     var fn = window[function_name]; 
     if(typeof fn === 'function') 
