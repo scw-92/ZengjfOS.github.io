@@ -111,8 +111,8 @@ function deal_with_Keep_Walk_job (frame_type, demo_name, path_name) {
 
     console.info(readme_md);    
 
-    template_css  = 'templates/' + frame_type + '/about_frame.css';
-    template_html = 'templates/' + frame_type + '/about_frame.html';
+    template_css  = 'templates/' + frame_type + '/keep_walk_frame.css';
+    template_html = 'templates/' + frame_type + '/keep_walk_frame.html';
 
     dynamic_get_CSS(template_css);
 
@@ -186,8 +186,8 @@ function nav_click_search_content(obj){
     }
 }
 
-function show_home_page(){ 
-    
+function show_home_page(obj){ 
+
     if (configs.hasOwnProperty('home_page')
             && configs['home_page'].hasOwnProperty('show')
             && configs['home_page']['show']) {
@@ -200,6 +200,9 @@ function show_home_page(){
                 show_content_with_frame(frame_type, demo_name, path_name);
             });
         });
+
+        // just show a time
+        configs['home_page']['show'] = false;
     } else {
         $.ajax({ 
             async:false, 
