@@ -321,17 +321,17 @@ $(function(){
         name:'lang', 
         path:'language/', 
         mode:'both',
-        language:'zh',
+        language:'',
         async: true,
         callback: function() {
             // We specified mode: 'both' so translated values will be
             // available as JS vars/functions and as a map
 
             // Accessing a simple value through the map
-            console.info(jQuery.i18n.prop('title'));
+            console.info(jQuery.i18n.prop('lang_title'));
 
             // Accessing a simple value through a JS variable
-            console.info(title);
+            console.info(lang_title);
         }
     });
 });
