@@ -317,6 +317,8 @@ $(function(){
     // This will initialize the plugin 
     // and show two dialog boxes: one with the text "Olá World"
     // and other with the text "Good morning John!" 
+    // How to dynamically change language using jquery-i18n-properties and JavaScript?
+    //    https://stackoverflow.com/questions/15637059/how-to-dynamically-change-language-using-jquery-i18n-properties-and-javascript
     jQuery.i18n.properties({
         name:'lang', 
         path:'language/', 
@@ -328,10 +330,13 @@ $(function(){
             // available as JS vars/functions and as a map
 
             // Accessing a simple value through the map
-            console.info(jQuery.i18n.prop('lang_title'));
+            console.info(jQuery.i18n.prop('lang_Demo_Analysis'));
 
             // Accessing a simple value through a JS variable
-            console.info(lang_title);
+            console.info(lang_Demo_Analysis);
+            console.info($(".lang_Demo_Analysis"));
+            console.info($(".lang_Demo_Analysis").html(jQuery.i18n.prop("lang_Demo_Analysis")));
+
         }
     });
 });
