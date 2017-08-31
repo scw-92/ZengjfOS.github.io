@@ -304,8 +304,8 @@ function nav_language_change(obj) {
             $(".lang_Show_Time")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_Show_Time");
             $(".lang_Keep_Walk")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_Keep_Walk");
             $(".lang_About")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_About");
+            console.info(jQuery.i18n.prop("lang_language"));
             $(".lang_language")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_language");
-
         }
     });
 }

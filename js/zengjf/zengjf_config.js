@@ -4,6 +4,7 @@ var configs = {
     "blog" : "http://www.cnblogs.com/zengjfgit/",
     "github" : "https://github.com/ZengjfOS",
     "version" : "0.0.1",
+    "language" : "en",
     "home_page" : {
         "show" : true,
         "Show_Time" : {
