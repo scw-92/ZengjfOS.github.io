@@ -1,3 +1,5 @@
+var current_language ="";
+
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
@@ -109,8 +111,6 @@ function deal_with_Keep_Walk_job (frame_type, demo_name, path_name) {
 
     readme_md  = 'src/' + frame_type + '/' + path_name + '/README.md';
 
-    console.info(readme_md);    
-
     template_css  = 'templates/' + frame_type + '/keep_walk_frame.css';
     template_html = 'templates/' + frame_type + '/keep_walk_frame.html';
 
@@ -160,12 +160,15 @@ function IsURL(str_url){
 
 function getNavigationMapsValue(map_key) {
     var value = "";
-
-    _.each(configs.nav.maps, (item, key, list) => {
-        if (_.keys(item)[0] == map_key) {
-            value = (item[map_key]);
-        }
-    });
+    if (current_language.indexOf("en") != -1) {
+        return map_key;
+    } else {
+        _.each(configs.nav.maps, (item, key, list) => {
+            if (_.keys(item)[0] == map_key) {
+                value = (item[map_key]);
+            }
+        });
+    }
 
     return value;
 }
@@ -175,7 +178,6 @@ function nav_click_search_content(obj){
     demo_name  = obj.innerHTML;
     current_page = configs["nav"][frame_type]["pages"][obj.innerHTML];
 
-    console.info(current_page);
     if (current_page.hasOwnProperty('markdown') 
             && current_page['markdown'] == "url") {
         show_content_with_frame(frame_type, demo_name, current_page['url']);
@@ -271,6 +273,43 @@ function dynamic_get_CSS (file_path) {
     $('head').append('<link rel="stylesheet" type="text/css" href="' + file_path + '">');
 }
 
+function nav_language_change(obj) {
+    var language = "";
+    if (obj == undefined ) {
+        language = $.i18n.normaliseLanguageCode({"language" : ""});
+    } else {
+        language = obj.innerHTML.toString();
+        $.i18n.normaliseLanguageCode({"language": language});
+    }
+
+    current_language = language;
+
+    // This will initialize the plugin 
+    // and show two dialog boxes: one with the text "Olá World"
+    // and other with the text "Good morning John!" 
+    // How to dynamically change language using jquery-i18n-properties and JavaScript?
+    //    https://stackoverflow.com/questions/15637059/how-to-dynamically-change-language-using-jquery-i18n-properties-and-javascript
+    jQuery.i18n.properties({
+        name:'lang', 
+        path:'language/', 
+        mode:'both',
+        language: language,
+        async: true,
+        callback: function() {
+            // We specified mode: 'both' so translated values will be
+            // available as JS vars/functions and as a map
+
+            // Accessing a simple value through the map
+            $('.lang_Demo_Analysis')[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_Demo_Analysis");
+            $(".lang_Show_Time")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_Show_Time");
+            $(".lang_Keep_Walk")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_Keep_Walk");
+            $(".lang_About")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_About");
+            $(".lang_language")[0].childNodes[0].nodeValue = jQuery.i18n.prop("lang_language");
+
+        }
+    });
+}
+
 class Zengjf_utils {
     constructor() {
         console.info("Zengjf_utils constructor");
@@ -314,30 +353,6 @@ $(function(){
 
     zengjfos = new ZengjfOS();
 
-    // This will initialize the plugin 
-    // and show two dialog boxes: one with the text "Olá World"
-    // and other with the text "Good morning John!" 
-    // How to dynamically change language using jquery-i18n-properties and JavaScript?
-    //    https://stackoverflow.com/questions/15637059/how-to-dynamically-change-language-using-jquery-i18n-properties-and-javascript
-    jQuery.i18n.properties({
-        name:'lang', 
-        path:'language/', 
-        mode:'both',
-        language:'',
-        async: true,
-        callback: function() {
-            // We specified mode: 'both' so translated values will be
-            // available as JS vars/functions and as a map
-
-            // Accessing a simple value through the map
-            console.info(jQuery.i18n.prop('lang_Demo_Analysis'));
-
-            // Accessing a simple value through a JS variable
-            console.info(lang_Demo_Analysis);
-            console.info($(".lang_Demo_Analysis"));
-            console.info($(".lang_Demo_Analysis").html(jQuery.i18n.prop("lang_Demo_Analysis")));
-
-        }
-    });
+    nav_language_change();
 });
 
