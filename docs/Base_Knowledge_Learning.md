@@ -1,11 +1,8 @@
-# Thread.js Learning
+# Base Knowledge Learning
 
-## 一、Notes(docs or source code)
+## 一、参考文档
 
-* [0001_a_cube.html](src/0001_a_cube.html)
-* [0002_a_dot_to_line.html](src/0002_a_dot_to_line.html)
-* [0003_grid.html](src/0003_grid.html)
-* [0004_move.html](src/0004_move.html)
+[Threejs基础教程](http://www.hewebgl.com/article/articledir/1)
 
 ## 二、坐标轴
 
