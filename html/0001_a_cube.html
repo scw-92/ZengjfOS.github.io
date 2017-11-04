@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>canvas { width: 100%; height: 100% }</style>
+    <script src="js/three.min.js"></script>
+</head>
+<body>
+    <script>
+        // 获取场景
+        var scene = new THREE.Scene();
+        
+        // 获取摄像头，我们屏幕看到的内容，就是这个摄像头拍摄到的
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        
+        // 获取渲染器
+        var renderer = new THREE.WebGLRenderer();
+        
+        // 设置渲染尺寸
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // 将渲染器放置在body里面
+        document.body.appendChild(renderer.domElement);
+
+        // 创建一个立方体，可以认为是一个骨架
+        var geometry = new THREE.CubeGeometry(1,1,1);
+        // 创建一种材质，可以认为是一件衣服
+        var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+        // 将材质放在立方体上，相当于将衣服穿在骨架上
+        var cube = new THREE.Mesh(geometry, material); 
+        // 往场景里加入立方体
+        scene.add(cube);
+
+        // 设置Camera的在Z轴的位置
+        camera.position.z = 5;
+
+        function render() {
+            // 重复调用的
+            requestAnimationFrame(render);
+
+            // 改变立方体的x轴和y轴坐标
+            cube.rotation.x += 0.1;
+            cube.rotation.y += 0.1;
+            // 将场景渲染到Camera中显示，由于Camera就是我们在屏幕中看到的，所以，这里也就是渲染出Camera所在的场景的位置的图像
+            renderer.render(scene, camera);
+        }
+
+        render();
+    </script>
+</body>
+</html>
