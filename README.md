@@ -3,6 +3,7 @@
 ## 参考文档：
 
 [HT for Web](http://hightopo.com/demos/index.html)
+[从端到云——工业物联网项目全栈快速开发实践](http://www.cnblogs.com/yefanqiu/p/7778964.html)
 
 ## Notes(docs or source code)
 
