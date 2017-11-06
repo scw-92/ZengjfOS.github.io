@@ -8,6 +8,8 @@
 
 **右手坐标系**，这个需要注意的就是实际看到的坐标轴，要注意和`Camera`的位置有关系。可以将`Camera`当做我们的眼睛。
 
+![../img/RightHandAxis.png](../img/RightHandAxis.png)
+
 ## 三、相机
 
 * **正投影相机**: `THREE.OrthographicCamera`，机械制图里面经常用的；
