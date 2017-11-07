@@ -7,6 +7,7 @@
 
 ## Notes(docs or source code)
 
+* [docs/Geomety_Group_Merge.md](docs/Geomety_Group_Merge.md)
 * [docs/Base_Knowledge_Learning.md](docs/Base_Knowledge_Learning.md)
 * [0004_move.html](html/0004_move.html)
 * [0003_grid.html](html/0003_grid.html)
