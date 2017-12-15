@@ -9,7 +9,9 @@ var configs = {
         "show" : true,
         "Show_Time" : {
             "pages" : {
-                "serial_assistant" : {
+                "ser
+				
+				ial_assistant" : {
                     "index" : "001",
                     "type" : "html"
                 }
@@ -61,7 +63,7 @@ var configs = {
         "About" : {
             "pages" : {
                 /**
-                 * type为divider的类型为分隔符
+                 * type为divider的类型是分隔符
                  */
                 "divider1" : {
                     "type" : "divider",
